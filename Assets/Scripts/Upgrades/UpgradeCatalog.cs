@@ -1,18 +1,19 @@
 using System;
 using UnityEngine;
+using Game.ConfigSkill;
 
-namespace Sample
+namespace Game.CoreUpgrade
 {
     [CreateAssetMenu(
         fileName = "UpgradeCatalog",
-        menuName = "Sample/New UpgradeCatalog"
+        menuName = "Upgrade/Base/UpgradeCatalog"
     )]
     public sealed class UpgradeCatalog : ScriptableObject
     {
         [SerializeField]
         private UpgradeConfig[] configs;
         
-        public UpgradeConfig[] GetAllUpgrades()
+        public UpgradeConfig[] GetAllUpgradesConfig()
         {
             return this.configs;
         }

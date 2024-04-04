@@ -4,7 +4,7 @@ using System.Linq;
 using Game.Gameplay.Player;
 using Sirenix.OdinInspector;
 
-namespace Sample
+namespace Game.CoreUpgrade
 {
     [Serializable]
     public sealed class UpgradesManager
@@ -16,7 +16,7 @@ namespace Sample
 
         private MoneyStorage moneyStorage;
 
-        public void Construct(MoneyStorage moneyStorage)
+        public UpgradesManager(MoneyStorage moneyStorage)
         {
             this.moneyStorage = moneyStorage;
         }
@@ -48,6 +48,11 @@ namespace Sample
                 return false;
             }
 
+            if (!upgrade.CanUpgrade())
+            {
+                return false;
+            }
+
             var price = upgrade.NextPrice;
             return this.moneyStorage.CanSpendMoney(price);
         }
@@ -67,7 +72,6 @@ namespace Sample
         }
 
         [Title("Methods")]
-        [Button]
         public bool CanLevelUp(string id)
         {
             var upgrade = this.upgrades[id];

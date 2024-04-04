@@ -1,8 +1,8 @@
 using System;
 using Sirenix.OdinInspector;
-// ReSharper disable ConvertToAutoPropertyWithPrivateSetter
+using Game.ConfigSkill;
 
-namespace Sample
+namespace Game.CoreUpgrade
 {
     public abstract class Upgrade
     {
@@ -40,8 +40,18 @@ namespace Sample
             this.currentLevel = level;
         }
 
+        public virtual bool CanUpgrade()
+        {
+            return true;
+        }
+        
         public void LevelUp()
         {
+            if (!CanUpgrade())
+            {
+                throw new Exception($"Can not upgrade");
+            }
+
             if (this.Level >= this.MaxLevel)
             {
                 throw new Exception($"Can not increment level for upgrade {this.config.id}!");
